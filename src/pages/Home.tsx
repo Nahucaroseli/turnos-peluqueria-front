@@ -9,8 +9,6 @@ export function Home(){
                 <Aside></Aside>
                 <main className="flex-1 overflow-y-auto p-6 mt-20">
                         <h1>Home</h1>
-                        <div className="h- mt-4">
-                        </div>
                 </main>
             </div>
 
