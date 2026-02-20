@@ -11,7 +11,6 @@ export function Home(){
                         <h1>Home</h1>
                 </main>
             </div>
-
         </div>
     )
 }
