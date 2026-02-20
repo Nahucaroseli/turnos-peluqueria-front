@@ -1,15 +1,15 @@
 import './App.css'
+import { Aside } from './components/Aside'
 import { Navbar } from './components/Navbar'
 
 function App() {
 
   return (
-    <>
-      <Navbar></Navbar>
-      <div className=''>
+    <div className='min-h-screen'>
+            <Navbar></Navbar>
+      <Aside></Aside>
 
-      </div>
-    </>
+    </div>
   )
 }
 
