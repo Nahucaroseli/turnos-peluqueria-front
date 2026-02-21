@@ -13,7 +13,7 @@ export function Navbar(){
             <i onClick={(e)=>{e.preventDefault(); setIsOpen(!isOpen);}} className="absolute right-3 fa-solid cursor-pointer fa-bars text-2xl mt-4 md:invisible"></i>
         </div>
         
-        <div className={`fixed ${isOpen? "translate-x-0":"translate-x-full"} transform transition duration-800 ease-in-out flex flex-col gap-y-20 w-full bg-white h-screen pt-30 items-center gap-x-5`}>
+        <div className={`fixed ${isOpen? "translate-x-0":"translate-x-full"} z-1 transform transition duration-800 ease-in-out flex flex-col gap-y-20 w-full bg-white h-screen pt-30 items-center gap-x-5`}>
             <Link to={"/"} className="text-xl cursor-pointer hover:scale-120 transition">Home</Link >
             
             <Link to={"/calendario"} className=" text-xl cursor-pointer hover:scale-120 transition">Calendario</Link >
