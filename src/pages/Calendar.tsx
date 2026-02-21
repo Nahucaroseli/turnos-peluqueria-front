@@ -9,7 +9,7 @@ export function Calendar(){
                     <div className="flex flex-1 overflow-hidden">
                         <Aside></Aside>
                         <main className="flex-1 overflow-y-auto p-6 mt-20">
-                                <h1>Clientes</h1>
+                                <h1 className="text-2xl">Clientes</h1>
                         </main>
                     </div>
         
