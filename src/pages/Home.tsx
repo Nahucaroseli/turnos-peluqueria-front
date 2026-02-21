@@ -1,9 +1,32 @@
+import { useEffect, useState } from "react";
+import { getClients } from "../api/service-clients";
 import { Aside } from "../components/Aside"
 import { Navbar } from "../components/Navbar"
+import type { Client } from "../types/Client";
 
 export function Home(){
 
     const currentDate = new Date();
+    const [users,setUsers] = useState<Client[]>([]);
+
+    const getUsers = async()=>{
+        const clients = await getClients();
+        setUsers(clients);
+    };
+
+    useEffect(()=>{
+        
+        getUsers();
+
+    },[]);
+    
+    useEffect(()=>{
+
+        console.log(users);
+
+    },[users]);
+
+    
     const formattedDateCustom = currentDate.toLocaleDateString('es-AR', {
         year: 'numeric',
         month: 'long',
