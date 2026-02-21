@@ -8,7 +8,7 @@ export function Config(){
             <div className="flex flex-1 overflow-hidden">
                 <Aside></Aside>
                 <main className="flex-1 overflow-y-auto p-6 mt-20">
-                        <h1>Configuracion</h1>
+                        <h1 className="text-xl">Configuracion</h1>
                 </main>
             </div>
 
