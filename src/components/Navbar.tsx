@@ -7,13 +7,13 @@ export function Navbar(){
 
     return(  
         <>
-        <div className="flex flex-row w-full h-16 bg-amber-200 p-1 gap-x-3 z-1000 absolute shadow-md">
+        <div className="flex flex-row w-full h-16 bg-white p-1 gap-x-3 z-1000 absolute shadow-md">
             <img src="/Logo.png" alt="" className="w-15 h-15"/>
             <h1 className="text-2xl mt-3">Peluqueria Vimix</h1>
             <i onClick={(e)=>{e.preventDefault(); setIsOpen(!isOpen);}} className="absolute right-3 fa-solid cursor-pointer fa-bars text-2xl mt-4 md:invisible"></i>
         </div>
         
-        <div className={`fixed ${isOpen? "translate-x-0":"translate-x-full"} transform transition duration-800 ease-in-out flex flex-col gap-y-20 w-full bg-amber-200 h-screen pt-30 items-center gap-x-5`}>
+        <div className={`fixed ${isOpen? "translate-x-0":"translate-x-full"} transform transition duration-800 ease-in-out flex flex-col gap-y-20 w-full bg-white h-screen pt-30 items-center gap-x-5`}>
             <Link to={"/"} className="text-xl cursor-pointer hover:scale-120 transition">Home</Link >
             
             <Link to={"/calendario"} className=" text-xl cursor-pointer hover:scale-120 transition">Calendario</Link >
