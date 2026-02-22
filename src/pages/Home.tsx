@@ -38,6 +38,17 @@ export function Home(){
                             <img src="/flower.png" className="w-50 opacity-40 object-contain relative left-12 -top-4" alt="" />
                             <img src="/flower.png" className="w-50 opacity-40 object-contain relative left-12 -top-4" alt="" />
                         </div>
+                        <div className="flex-1 md:w-250 bg-red-100 mt-10 overflow-hidden">
+                            <h1 className="text-2xl">Proximos Turnos</h1>
+                            {clients.map((client)=>{
+                                return (
+                                    <div className="bg-red-300 h-7 mt-9 rounded-xl">
+                                        <h1 className="text-xl">{client.name}</h1>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                            
                 </main>
             </div>
         </div>
