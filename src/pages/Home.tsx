@@ -42,7 +42,7 @@ export function Home(){
                             <h1 className="text-2xl">Proximos Turnos</h1>
                             {clients.map((client)=>{
                                 return (
-                                    <div className="bg-red-300 h-7 mt-9 rounded-xl">
+                                    <div key={client.id} className="bg-red-300 h-7 mt-9 rounded-xl">
                                         <h1 className="text-xl">{client.name}</h1>
                                     </div>
                                 )
