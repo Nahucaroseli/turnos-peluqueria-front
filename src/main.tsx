@@ -4,13 +4,17 @@ import {BrowserRouter} from 'react-router-dom';
 import './index.css'
 import App from './App.tsx'
 import { ClientProvider } from './context/ClientContext.tsx';
+import { ServiceProvider } from './context/ServiceContext.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ClientProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <ServiceProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ServiceProvider>
     </ClientProvider>
+
   </StrictMode>,
 )
