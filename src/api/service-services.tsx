@@ -1,5 +1,4 @@
-import type { CreateService } from "../types/CreateService";
-import type { Service } from "../types/Service";
+import type { CreateService, Service } from "../types/Service";
 
 //const LOCAL_API = import.meta.env.VITE_LOCAL_API;
 const API_URL = import.meta.env.VITE_API_URL;

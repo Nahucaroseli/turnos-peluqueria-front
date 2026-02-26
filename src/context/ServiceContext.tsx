@@ -1,8 +1,7 @@
 import { createContext, useEffect, useState, type ReactNode } from "react";
 import type { ServiceContextType } from "../types/ServiceContextType";
-import type { Service } from "../types/Service";
+import type { CreateService, Service } from "../types/Service";
 import { addService, getServices } from "../api/service-services";
-import type { CreateService } from "../types/CreateService";
 
 export const ServiceContext = createContext<ServiceContextType|undefined>(undefined);
 

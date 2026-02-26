@@ -3,3 +3,5 @@ export type Service = {
     "name":string,
     "price":number
 }
+
+export type CreateService = Omit<Service,"id">;

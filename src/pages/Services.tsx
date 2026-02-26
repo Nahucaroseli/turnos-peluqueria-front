@@ -3,8 +3,7 @@ import { Aside } from "../components/Aside"
 import { Navbar } from "../components/Navbar"
 import { ServiceContext } from "../context/ServiceContext"
 import { useForm, type SubmitHandler } from "react-hook-form";
-import type { ServiceFormValues } from "../types/ServiceFormValues";
-import type { CreateService } from "../types/CreateService";
+import type { CreateService } from "../types/Service";
 
 export function Services(){
 
@@ -53,11 +52,11 @@ export function Services(){
 
 export function ServiceForm({formValue,setFormValue}:{formValue:boolean,setFormValue:React.Dispatch<React.SetStateAction<boolean>>}){
 
-    const {register,handleSubmit} = useForm<ServiceFormValues>();
+    const {register,handleSubmit} = useForm<CreateService>();
     
     const {addServiceContext} = useContext(ServiceContext)!;
 
-    const onSubmit:SubmitHandler<ServiceFormValues> = (data)=>{
+    const onSubmit:SubmitHandler<CreateService> = (data)=>{
         const ser:CreateService = {
             "name":data.name,
             "price":data.price

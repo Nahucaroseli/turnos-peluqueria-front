@@ -1,5 +1,4 @@
-import type { CreateService } from "./CreateService";
-import type { Service } from "./Service";
+import type { CreateService, Service } from "./Service";
 
 export type ServiceContextType = {
     services:Service[],
