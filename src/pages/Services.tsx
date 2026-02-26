@@ -30,11 +30,13 @@ export function Services(){
                             <div className="flex flex-wrap gap-y-10 gap-x-10 mt-10 w-full md:flex-row">
                                 {services.map((service)=>{
                                     return (
-                                        <div key={service.id} className="bg-white w-60 h-40 p-3 rounded-xl flex flex-col md:w-70 overflow-hidden">
-                                            
+                                        <div key={service.id} className="bg-white w-70 h-40 p-3 rounded-xl flex flex-col md:w-70 overflow-hidden">
+
                                             <h1 className="text-lg">{service.name}</h1>
                                             <img className="w-30 relative -right-26 top-10 md:-right-30"  src="/scissors.avif" alt="" />
-                                            <h1 className="text-lg mt-auto text-green-700">${service.price}</h1>
+
+                                            <h1 className="text-lg pt-2 text-green-700">${service.price}</h1>
+                                            <i className="fa-solid fa-ellipsis relative left-60 -top-34 cursor-pointer"></i>
                                         </div>
                                     )
                                 })}
