@@ -10,16 +10,18 @@ export function Services(){
     const {services} = useContext(ServiceContext)!;
 
     const [openServiceForm,setOpenServiceForm] = useState(false);
+
+    const [isEllipsisOpen,setIsEllipsisOpen] = useState(Number);
     
     useEffect(()=>{
-        
+        console.log(isEllipsisOpen);
         console.log(services);
     },[services])
 
 
     return (
         <>
-        <div id="services_overlay">
+        <div id="services_overlay" onClick={()=>{setIsEllipsisOpen(888)}}>
             <div className='h-screen flex flex-col'>
                 <Navbar></Navbar>
                 <div className="flex flex-1 overflow-hidden">
@@ -30,13 +32,15 @@ export function Services(){
                             <div className="flex flex-wrap gap-y-10 gap-x-10 mt-10 w-full md:flex-row">
                                 {services.map((service)=>{
                                     return (
-                                        <div key={service.id} className="bg-white w-70 h-40 p-3 rounded-xl flex flex-col md:w-70 overflow-hidden">
+                                        <div key={service.id} className="bg-white w-70 h-40 p-3 rounded-xl flex flex-col md:w-70">
 
                                             <h1 className="text-lg">{service.name}</h1>
                                             <img className="w-30 relative -right-26 top-10 md:-right-30"  src="/scissors.avif" alt="" />
 
                                             <h1 className="text-lg pt-2 text-green-700">${service.price}</h1>
-                                            <i className="fa-solid fa-ellipsis relative left-60 -top-34 cursor-pointer"></i>
+                                            <i onClick={(e)=> {setIsEllipsisOpen(service.id); e.stopPropagation();}} className="fa-solid fa-ellipsis relative left-60 -top-34 cursor-pointer"></i>
+                                            <button className={`${isEllipsisOpen === service.id?"bg-red-200 relative w-20 -top-50 left-52 rounded-t-xl":"hidden"}`}>Eliminar</button>
+                                            <button className={`${isEllipsisOpen === service.id?"bg-red-200 relative w-20 -top-50 left-52 rounded-b-x":"hidden"}`}>Editar</button>    
                                         </div>
                                     )
                                 })}
