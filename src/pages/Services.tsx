@@ -3,7 +3,7 @@ import { Aside } from "../components/Aside"
 import { Navbar } from "../components/Navbar"
 import { ServiceContext } from "../context/ServiceContext"
 import { useForm, type SubmitHandler } from "react-hook-form";
-import type { CreateService } from "../types/Service";
+import { type Service, type ServiceFormValues} from "../types/Service";
 
 export function Services(){
 
@@ -12,6 +12,8 @@ export function Services(){
     const [openServiceForm,setOpenServiceForm] = useState(false);
 
     const [isEllipsisOpen,setIsEllipsisOpen] = useState(Number);
+
+    const [serviceToEdit,setServiceToEdit] = useState<Service|null>(null);
     
     useEffect(()=>{
         console.log(isEllipsisOpen);
@@ -40,7 +42,7 @@ export function Services(){
                                             <h1 className="text-lg pt-2 text-green-700">${service.price}</h1>
                                             <i onClick={(e)=> {setIsEllipsisOpen(service.id); e.stopPropagation();}} className="fa-solid fa-ellipsis relative left-60 -top-34 cursor-pointer"></i>
                                             <button onClick={()=>{deleteServiceContext(service.id)}} className={`${isEllipsisOpen === service.id?"bg-red-200 relative w-20 -top-50 left-52 rounded-t-xl":"hidden"}`}>Eliminar</button>
-                                            <button className={`${isEllipsisOpen === service.id?"bg-red-200 relative w-20 -top-50 left-52 rounded-b-x":"hidden"}`}>Editar</button>    
+                                            <button onClick={()=>{setServiceToEdit(service); setOpenServiceForm(!openServiceForm);}} className={`${isEllipsisOpen === service.id?"bg-red-200 relative w-20 -top-50 left-52 rounded-b-x":"hidden"}`}>Editar</button>    
                                         </div>
                                     )
                                 })}
@@ -51,35 +53,47 @@ export function Services(){
 
             </div>
         </div>
-        <ServiceForm formValue={openServiceForm} setFormValue={setOpenServiceForm}></ServiceForm>
+        <ServiceForm serviceEdit={serviceToEdit} formValue={openServiceForm} setFormValue={setOpenServiceForm}></ServiceForm>
         </>
     )
 }
 
-export function ServiceForm({formValue,setFormValue}:{formValue:boolean,setFormValue:React.Dispatch<React.SetStateAction<boolean>>}){
+export function ServiceForm({serviceEdit,formValue,setFormValue}:{serviceEdit:Service|null,formValue:boolean,setFormValue:React.Dispatch<React.SetStateAction<boolean>>}){
 
-    const {register,handleSubmit} = useForm<CreateService>();
+    const {register,handleSubmit} = useForm<ServiceFormValues>();
     
-    const {addServiceContext} = useContext(ServiceContext)!;
+    const {addServiceContext,editServiceContext} = useContext(ServiceContext)!;
 
-    const onSubmit:SubmitHandler<CreateService> = (data)=>{
-        const ser:CreateService = {
+    const onSubmit:SubmitHandler<ServiceFormValues> = (data)=>{
+
+        if(serviceEdit){
+            const ser:Service = {
+            "id":serviceEdit.id,
             "name":data.name,
             "price":data.price
-        }
+           }
+           console.log(serviceEdit.id);
+           editServiceContext(ser);
+        }else{
+            const ser:ServiceFormValues = {
+            "name":data.name,
+            "price":data.price
+            }
         addServiceContext(ser);
+        }
     }
+
 
     return(
         <form onSubmit={handleSubmit(onSubmit)} className={`${formValue ? "flex flex-col fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-100 h-100 bg-white text-center rounded-xl":"hidden"}`}>
-            <h1 className="mt-10 text-xl">Agregar Servicio</h1>
+            <h1 className="mt-10 text-xl">{serviceEdit?'Editar':'Agregar'}</h1>
             <i onClick={()=> setFormValue(!formValue)} className="fa-solid fa-x relative -top-14 -right-93 cursor-pointer"></i>
             <div className="flex flex-col items-center text-center w-full mt-10 gap-y-7">
                 <label htmlFor="">Nombre</label>
                 <input type="text" className="border-1 border-solid w-50" {...register("name",{required:true})} placeholder="Nombre del Servicio"/>
                 <label htmlFor="">Precio</label>
                 <input type="text" className="border-1 border-solid w-50" {...register("price",{required:true})} placeholder="Precio"/>
-                <button type="submit" className="cursor-pointer hover:underline hover:scale-110 transition">Agregar</button>
+                <button type="submit" className="cursor-pointer hover:underline hover:scale-110 transition">{serviceEdit?'Editar':'Agregar'}</button>
             </div>
         </form>
     )

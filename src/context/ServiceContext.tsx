@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState, type ReactNode } from "react";
 import type { ServiceContextType } from "../types/ServiceContextType";
-import type { CreateService, Service } from "../types/Service";
-import { addService, deleteService, getServices } from "../api/service-services";
+import type { ServiceFormValues, Service } from "../types/Service";
+import { addService, deleteService, editService, getServices } from "../api/service-services";
 
 export const ServiceContext = createContext<ServiceContextType|undefined>(undefined);
 
@@ -21,7 +21,7 @@ export const ServiceProvider = ({children}: {children:ReactNode})=>{
     },[]);
 
 
-    const addServiceContext = async(newService:CreateService)=>{
+    const addServiceContext = async(newService:ServiceFormValues)=>{
         const res = await addService(newService);
         setServices([...services,res]);
     };
@@ -34,10 +34,21 @@ export const ServiceProvider = ({children}: {children:ReactNode})=>{
         setServices(newServices);
     };
 
+    const editServiceContext = async(editS:Service)=>{
+        const res = await editService(editS);
+        const newServices = services.map((s)=>{
+            if(s.id==editS.id){
+                return res;
+            }
+            return s;
+        })
+        setServices(newServices);
+    }
+
     return (
 
 
-        <ServiceContext.Provider value={{services,setServices,addServiceContext,deleteServiceContext}}>
+        <ServiceContext.Provider value={{services,setServices,addServiceContext,deleteServiceContext,editServiceContext}}>
             {children}
         </ServiceContext.Provider>
 

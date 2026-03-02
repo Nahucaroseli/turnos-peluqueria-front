@@ -4,4 +4,4 @@ export type Service = {
     "price":number
 }
 
-export type CreateService = Omit<Service,"id">;
+export type ServiceFormValues = Omit<Service,"id">;

@@ -1,4 +1,4 @@
-import type { CreateService, Service } from "../types/Service";
+import type { ServiceFormValues, Service } from "../types/Service";
 
 //const LOCAL_API = import.meta.env.VITE_LOCAL_API;
 const API_URL = import.meta.env.VITE_API_URL;
@@ -16,7 +16,7 @@ export const getServices = async():Promise<Service[]>=>{
 
 };
 
-export const addService = async(service:CreateService):Promise<Service> =>{
+export const addService = async(service:ServiceFormValues):Promise<Service> =>{
     try {
         const response = await fetch(`${API_URL}/services`,{
             method:"POST",
@@ -40,6 +40,25 @@ export const deleteService = async(idService:number):Promise<Response> =>{
             method: "DELETE",
         })
         return response;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+};
+
+
+export const editService = async(editS:Service):Promise<Service> =>{
+    try {
+            const response = await fetch(`${API_URL}/services/${editS.id}`,{
+                method:"PUT",
+                headers:{
+                    "Content-type":"application/JSON"
+                },
+                body: JSON.stringify(editS)
+            });
+
+            const data = response.json();
+            return data;
     } catch (error) {
         console.log(error);
         throw error;
