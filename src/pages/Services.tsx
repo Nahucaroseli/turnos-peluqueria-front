@@ -7,7 +7,7 @@ import type { CreateService } from "../types/Service";
 
 export function Services(){
 
-    const {services} = useContext(ServiceContext)!;
+    const {services,deleteServiceContext} = useContext(ServiceContext)!;
 
     const [openServiceForm,setOpenServiceForm] = useState(false);
 
@@ -39,7 +39,7 @@ export function Services(){
 
                                             <h1 className="text-lg pt-2 text-green-700">${service.price}</h1>
                                             <i onClick={(e)=> {setIsEllipsisOpen(service.id); e.stopPropagation();}} className="fa-solid fa-ellipsis relative left-60 -top-34 cursor-pointer"></i>
-                                            <button className={`${isEllipsisOpen === service.id?"bg-red-200 relative w-20 -top-50 left-52 rounded-t-xl":"hidden"}`}>Eliminar</button>
+                                            <button onClick={()=>{deleteServiceContext(service.id)}} className={`${isEllipsisOpen === service.id?"bg-red-200 relative w-20 -top-50 left-52 rounded-t-xl":"hidden"}`}>Eliminar</button>
                                             <button className={`${isEllipsisOpen === service.id?"bg-red-200 relative w-20 -top-50 left-52 rounded-b-x":"hidden"}`}>Editar</button>    
                                         </div>
                                     )

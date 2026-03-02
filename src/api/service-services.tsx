@@ -32,3 +32,16 @@ export const addService = async(service:CreateService):Promise<Service> =>{
         throw error;
     }
 };
+
+
+export const deleteService = async(idService:number):Promise<Response> =>{
+    try {
+        const response = await fetch(`${API_URL}/services/${idService}`,{
+            method: "DELETE",
+        })
+        return response;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+};
