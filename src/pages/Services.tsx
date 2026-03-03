@@ -41,8 +41,8 @@ export function Services(){
 
                                             <h1 className="text-lg pt-2 text-green-700">${service.price}</h1>
                                             <i onClick={(e)=> {setIsEllipsisOpen(service.id); e.stopPropagation();}} className="fa-solid fa-ellipsis relative left-60 -top-34 cursor-pointer"></i>
-                                            <button onClick={()=>{deleteServiceContext(service.id)}} className={`${isEllipsisOpen === service.id?"bg-red-200 relative w-20 -top-50 left-52 rounded-t-xl":"hidden"}`}>Eliminar</button>
-                                            <button onClick={()=>{setServiceToEdit(service); setOpenServiceForm(!openServiceForm);}} className={`${isEllipsisOpen === service.id?"bg-red-200 relative w-20 -top-50 left-52 rounded-b-x":"hidden"}`}>Editar</button>    
+                                            <button onClick={()=>{deleteServiceContext(service.id)}} className={`${isEllipsisOpen === service.id?"bg-white border-1 relative w-20 -top-50 left-52 rounded-t-xl cursor-pointer transition hover:bg-slate-200":"hidden"}`}>Eliminar</button>
+                                            <button onClick={()=>{setServiceToEdit(service); setOpenServiceForm(!openServiceForm);}} className={`${isEllipsisOpen === service.id?"bg-white border-1 relative w-20 -top-50 left-52 rounded-b-xl cursor-pointer transition hover:bg-slate-200":"hidden"}`}>Editar</button>    
                                         </div>
                                     )
                                 })}
