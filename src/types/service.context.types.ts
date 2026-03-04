@@ -1,4 +1,4 @@
-import type { ServiceFormValues, Service } from "./Service";
+import type { ServiceFormValues, Service } from "./service.types";
 
 export type ServiceContextType = {
     services:Service[],

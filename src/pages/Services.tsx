@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react"
 import { Aside } from "../components/Aside"
 import { Navbar } from "../components/Navbar"
-import { ServiceContext } from "../context/ServiceContext"
+import { ServiceContext } from "../context/service.context"
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { type Service, type ServiceFormValues} from "../types/Service";
+import { type Service, type ServiceFormValues} from "../types/service.types";
 
 export function Services(){
 

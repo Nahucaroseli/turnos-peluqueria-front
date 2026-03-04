@@ -1,4 +1,4 @@
-import type { ServiceFormValues, Service } from "../types/Service";
+import type { ServiceFormValues, Service } from "../types/service.types";
 
 //const LOCAL_API = import.meta.env.VITE_LOCAL_API;
 const API_URL = import.meta.env.VITE_API_URL;

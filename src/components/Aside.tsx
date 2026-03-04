@@ -7,7 +7,7 @@ export function Aside(){
 
             <Link to={"/"} className="fa-solid fa-house text-xl cursor-pointer hover:scale-120 transition"></Link >
             
-            <Link to={"/calendario"} className="fa-solid fa-user text-xl cursor-pointer hover:scale-120 transition"></Link >
+            <Link to={"/calendario"} className="fa-regular fa-calendar-days text-xl cursor-pointer hover:scale-120 transition"></Link >
 
             <Link to={"/servicios"} className="fa-solid fa-scissors text-xl cursor-pointer hover:scale-120 transition"></Link >
             
@@ -18,5 +18,4 @@ export function Aside(){
         </div>
 
     )
-
 }

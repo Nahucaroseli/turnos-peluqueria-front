@@ -1,18 +1,18 @@
 import { useContext, useEffect } from "react";
 import { Aside } from "../components/Aside"
 import { Navbar } from "../components/Navbar"
-import { ClientContext } from "../context/ClientContext";
+import { TurnoContext } from "../context/turno.context";
 
 export function Home(){
 
     const currentDate = new Date();
     
-    const {clients} = useContext(ClientContext)!;
+    const {turnos} = useContext(TurnoContext)!;
 
     
     useEffect(()=>{
 
-        console.log(clients);
+        console.log(turnos);
 
     });
 
@@ -38,12 +38,26 @@ export function Home(){
                             <img src="/flower.png" className="w-50 opacity-40 object-contain relative left-12 -top-4" alt="" />
                             <img src="/flower.png" className="w-50 opacity-40 object-contain relative left-12 -top-4" alt="" />
                         </div>
-                        <div className="flex-1 md:w-250 bg-red-100 mt-10 overflow-hidden">
+                        <div className="flex-1 md:w-250 mt-10 overflow-hidden">
                             <h1 className="text-2xl">Proximos Turnos</h1>
-                            {clients.map((client)=>{
+                            {turnos.map((turno)=>{
+                                const horario = new Date(turno.hora);
+                                const hora = horario.getHours();
+                                const minutos = horario.getMinutes();
                                 return (
-                                    <div key={client.id} className="bg-red-300 h-7 mt-9 rounded-xl">
-                                        <h1 className="text-xl">{client.name}</h1>
+                                    <div key={turno.id} className="bg-white w-auto h-7 mt-9 rounded-xl h-18 flex flex-row justify-between md:w-140">
+                                        <div className="flex flex-col">
+                                            <h1 className="text-xl m-2">{turno.serviceId.name}</h1>
+                                            <div className="flex flex-row gap-x-5">
+                                                <h2 className="ml-2">Cliente: {turno.clientId.name}</h2>
+                                                <h2>Cel: {turno.clientId.phone}</h2>
+                                            </div>
+
+                                        </div>
+                                        <div className="flex flex-col justify-center mr-2">
+                                            <h2 className="">{hora}:{minutos} HS</h2>
+                                        </div>
+
                                     </div>
                                 )
                             })}

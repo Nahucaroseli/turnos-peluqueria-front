@@ -3,18 +3,18 @@ import { createRoot } from 'react-dom/client'
 import {BrowserRouter} from 'react-router-dom';
 import './index.css'
 import App from './App.tsx'
-import { ClientProvider } from './context/ClientContext.tsx';
-import { ServiceProvider } from './context/ServiceContext.tsx';
+import { TurnoProvider } from './context/turno.context.tsx';
+import { ServiceProvider } from './context/service.context.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ClientProvider>
+    <TurnoProvider>
       <ServiceProvider>
         <BrowserRouter>
           <App />
         </BrowserRouter>
       </ServiceProvider>
-    </ClientProvider>
+    </TurnoProvider>
 
   </StrictMode>,
 )
