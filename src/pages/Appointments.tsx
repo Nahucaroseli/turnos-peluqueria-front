@@ -20,7 +20,29 @@ export function Appointments(){
                         <main className="flex-1 overflow-y-auto p-6 mt-20">
                                 <h1 className="text-2xl">Turnos</h1>
                                 <button onClick={()=> setOpenTurnoForm(!openTurnoForm)} className="absolute right-3 top-27 cursor-pointer transition hover:scale-105">Asignar Turno</button>
-                                <div></div>
+                                <div className="flex flex-col">
+                                    {turnos.map((turno)=>{
+                                        const horario = new Date(turno.hora);
+                                        const hora = horario.getHours();
+                                        const minutos = horario.getMinutes();
+                                        return (
+                                                <div key={turno.id} className="bg-white w-auto h-7 mt-9 rounded-xl h-18 flex flex-row justify-between md:w-140">
+                                                    <div className="flex flex-col">
+                                                        <h1 className="text-xl m-2">{turno.serviceId.name}</h1>
+                                                        <div className="flex flex-row gap-x-5">
+                                                            <h2 className="ml-2">Cliente: {turno.clientId.name}</h2>
+                                                            <h2>Cel: {turno.clientId.phone}</h2>
+                                                        </div>
+
+                                                    </div>
+                                                    <div className="flex flex-col justify-center mr-2">
+                                                        <h2 className="">{hora}:{minutos} HS</h2>
+                                                    </div>
+
+                                                </div>
+                                            )
+                                    })}
+                                </div>
                         </main>
                     </div>
         
