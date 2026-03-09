@@ -22,9 +22,10 @@ export function Appointments(){
                                 <button onClick={()=> setOpenTurnoForm(!openTurnoForm)} className="absolute right-3 top-27 cursor-pointer transition hover:scale-105">Asignar Turno</button>
                                 <div className="flex flex-col">
                                     {turnos.map((turno)=>{
-                                        const horario = new Date(turno.hora);
-                                        const hora = horario.getHours();
-                                        const minutos = horario.getMinutes();
+                                        const horario = new Date(turno.hora).toLocaleTimeString("es-AR",{
+                                            hour:"2-digit",
+                                            minute:"2-digit"
+                                        })
                                         return (
                                                 <div key={turno.id} className="bg-white w-auto h-7 mt-9 rounded-xl h-18 flex flex-row md:w-140 overflow-hidden">
                                                     <div className="w-1 bg-yellow-500"></div>
@@ -38,7 +39,7 @@ export function Appointments(){
 
                                                         </div>
                                                         <div className="flex flex-col justify-center mr-2">
-                                                            <h2 className="">{hora}:{minutos} HS</h2>
+                                                            <h2 className="">{horario}</h2>
                                                         </div>
                                                     </div>
 
