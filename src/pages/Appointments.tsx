@@ -28,7 +28,7 @@ export function Appointments(){
                                         })
                                         return (
                                                 <div key={turno.id} className="bg-white w-auto h-7 mt-9 rounded-xl h-18 flex flex-row md:w-140 overflow-hidden">
-                                                    <div className="w-1 bg-yellow-500"></div>
+                                                    <div className={`w-1 ${turno.}`}></div>
                                                     <div className="flex flex-row justify-between w-full md:w-140">
                                                         <div className="flex flex-col">
                                                             <h1 className="text-xl m-2">{turno.serviceId.name}</h1>

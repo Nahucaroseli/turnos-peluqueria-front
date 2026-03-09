@@ -5,5 +5,6 @@ export type Turno ={
     "id": number,
     "hora":string,
     "clientId":Client,
-    "serviceId":Service
+    "serviceId":Service,
+    "pendiente":boolean
 }
