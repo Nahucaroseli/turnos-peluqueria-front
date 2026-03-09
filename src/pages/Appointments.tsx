@@ -2,6 +2,9 @@ import { useContext, useState } from "react";
 import { Aside } from "../components/Aside"
 import { Navbar } from "../components/Navbar"
 import { TurnoContext } from "../context/turno.context";
+import type { Turno, TurnoFormValues } from "../types/turno.types";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import { ServiceContext } from "../context/service.context";
 
 
 export function Appointments(){
@@ -10,9 +13,11 @@ export function Appointments(){
 
   const [openTurnoForm,setOpenTurnoForm] = useState(false);
 
+  const [turnoToEdit,setTurnoToEdit] = useState<Turno|null>(null);
 
 
         return (
+            <>
                 <div className='h-screen flex flex-col'>
                     <Navbar></Navbar>
                     <div className="flex flex-1 overflow-hidden">
@@ -51,6 +56,45 @@ export function Appointments(){
                     </div>
         
                 </div>
+                <AppointmentsForm turnoEdit={turnoToEdit} formValue={openTurnoForm} setFormValue={setOpenTurnoForm}></AppointmentsForm>
+                </>
             )
+
   
+}
+
+
+export function AppointmentsForm({turnoEdit,formValue,setFormValue}:{turnoEdit:Turno|null, formValue:boolean,setFormValue:React.Dispatch<React.SetStateAction<boolean>>}){
+
+    const {register,handleSubmit} = useForm<TurnoFormValues>();
+
+    const {services} = useContext(ServiceContext)!;
+
+    const onSubmit:SubmitHandler<TurnoFormValues> = (data) =>{
+
+    }
+
+    return(
+        <form onSubmit={handleSubmit(onSubmit)} className={`${formValue ? "flex flex-col fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-100 h-120 bg-white text-center rounded-xl":"hidden"}`}>
+            <h1 className="mt-10 text-xl">{turnoEdit?'Editar':'Agregar'}</h1>
+            <i onClick={()=> setFormValue(!formValue)} className="fa-solid fa-x relative -top-14 -right-93 cursor-pointer"></i>
+            <div className="flex flex-col items-center text-center w-full mt-10 gap-y-7">
+                <label htmlFor="">Nombre del Cliente</label>
+                <input type="text" className="border-1 border-solid w-50" {...register("name",{required:true})} placeholder="Nombre del Cliente"/>
+                <label htmlFor="">Telefono</label>
+                <input type="text" className="border-1 border-solid w-50" {...register("phone",{required:true})} placeholder="Telefono"/>
+                <label htmlFor="">Servicio</label>
+                <select className="border-1 border-solid w-50" {...register("serviceId",{required:true})}>
+                    {services.map((service)=> {
+                        return(
+                            <option key={service.id} value={service.id}>{service.name}</option>
+                        )
+                    })}
+  
+                </select>
+                <button type="submit" className="cursor-pointer hover:underline hover:scale-110 transition">{turnoEdit?'Editar':'Agregar'}</button>
+            </div>
+        </form>
+    )
+
 }

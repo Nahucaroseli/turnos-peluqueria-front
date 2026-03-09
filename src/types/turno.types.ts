@@ -8,3 +8,11 @@ export type Turno ={
     "serviceId":Service,
     "pendiente":boolean
 }
+
+export type TurnoFormValues = {
+    "hora": string,
+    "name": string,
+    "phone":string,
+    "serviceId":Service,
+    "pendiente":boolean
+}
