@@ -15,7 +15,6 @@ export function Appointments(){
 
   const [openTurnoForm,setOpenTurnoForm] = useState(false);
 
-  const [turnoToEdit,setTurnoToEdit] = useState<Turno|null>(null);
 
 
         return (
@@ -59,7 +58,7 @@ export function Appointments(){
                     </div>
         
                 </div>
-                <AppointmentsForm turnoEdit={turnoToEdit} formValue={openTurnoForm} setFormValue={setOpenTurnoForm}></AppointmentsForm>
+                <AppointmentsForm turnoEdit={null} formValue={openTurnoForm} setFormValue={setOpenTurnoForm}></AppointmentsForm>
                 </>
             )
 

@@ -19,7 +19,7 @@ export const getClients = async():Promise<Turno[]> =>{
 
 export const getTurnosDisponibles = async(fecha:Date):Promise<TurnoDisponible> =>{
     try {
-        const response = await fetch(`${API_URL}/turnos/disponibles`);
+        const response = await fetch(`${API_URL}/turnos/disponibles?fecha=${fecha}`);
         const data = await response.json();
         return data;
     } catch (error) {
