@@ -17,3 +17,9 @@ export type TurnoFormValues = {
     "serviceId":Service,
     "pendiente":boolean
 }
+
+
+export type TurnoDisponible = {
+    "fecha":Date,
+    "horarios":string[]
+}

@@ -5,6 +5,8 @@ import { TurnoContext } from "../context/turno.context";
 import type { Turno, TurnoFormValues } from "../types/turno.types";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { ServiceContext } from "../context/service.context";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 
 export function Appointments(){
@@ -71,19 +73,29 @@ export function AppointmentsForm({turnoEdit,formValue,setFormValue}:{turnoEdit:T
 
     const {services} = useContext(ServiceContext)!;
 
+    const [date, setDate] = useState<Date|null>(new Date());
+
     const onSubmit:SubmitHandler<TurnoFormValues> = (data) =>{
         console.log(data);
     }
 
     return(
-        <form onSubmit={handleSubmit(onSubmit)} className={`${formValue ? "flex flex-col fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-100 h-120 bg-white text-center rounded-xl":"hidden"}`}>
+        <form onSubmit={handleSubmit(onSubmit)} className={`${formValue ? "flex flex-col fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-100 h-130 bg-white text-center rounded-xl":"hidden"}`}>
             <h1 className="mt-10 text-xl">{turnoEdit?'Editar':'Agregar'}</h1>
             <i onClick={()=> setFormValue(!formValue)} className="fa-solid fa-x relative -top-14 -right-93 cursor-pointer"></i>
-            <div className="flex flex-col items-center text-center w-full mt-10 gap-y-7">
+            <div className="flex flex-col items-center text-center w-full mt-10 gap-y-5">
                 <label htmlFor="">Nombre del Cliente</label>
                 <input type="text" className="border-1 border-solid w-50" {...register("name",{required:true})} placeholder="Nombre del Cliente"/>
                 <label htmlFor="">Telefono</label>
                 <input type="text" className="border-1 border-solid w-50" {...register("phone",{required:true})} placeholder="Telefono"/>
+                <label htmlFor="">Fecha y Hora</label>
+                <div className="flex flex-row gap-x-3">
+                    <DatePicker className="border-1 text-center" selected={date} onChange={(date:Date|null) => setDate(date)} dateFormat="yyyy-MM-dd"/>
+                    <select name="" id="">
+                        <option value="">Dias</option>
+                    </select>
+                </div>        
+            
                 <label htmlFor="">Servicio</label>
                 <select className="border-1 border-solid w-50" {...register("serviceId",{required:true})}>
                     {services.map((service)=> {

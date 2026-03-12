@@ -1,4 +1,4 @@
-import type { Turno } from "../types/turno.types";
+import type { Turno, TurnoDisponible } from "../types/turno.types";
 
 //const LOCAL_API = import.meta.env.VITE_LOCAL_API;
 const API_URL = import.meta.env.VITE_API_URL;
@@ -15,3 +15,15 @@ export const getClients = async():Promise<Turno[]> =>{
     }
 
 };
+
+
+export const getTurnosDisponibles = async(fecha:Date):Promise<TurnoDisponible> =>{
+    try {
+        const response = await fetch(`${API_URL}/turnos/disponibles`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+        throw new Error("Error al buscar turnos disponibles");
+    }
+}
