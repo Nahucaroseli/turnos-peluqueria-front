@@ -4,8 +4,9 @@ import type { Service } from "./service.types"
 export type Turno ={
     "id": number,
     "hora":string,
-    "clientId":Client,
-    "serviceId":Service,
+    "fecha":Date
+    "client":Client,
+    "service":Service,
     "pendiente":boolean
 }
 

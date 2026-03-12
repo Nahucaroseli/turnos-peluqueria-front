@@ -27,24 +27,25 @@ export function Appointments(){
                                 <button onClick={()=> setOpenTurnoForm(!openTurnoForm)} className="absolute right-3 top-27 cursor-pointer transition hover:scale-105">Asignar Turno</button>
                                 <div className="flex flex-col">
                                     {turnos.map((turno)=>{
-                                        const horario = new Date(turno.hora).toLocaleTimeString("es-AR",{
-                                            hour:"2-digit",
-                                            minute:"2-digit"
+                                        const fecha = new Date(turno.fecha).toLocaleDateString("es-AR",{
+                                            dateStyle:"short"
                                         })
+                                        const horario = turno.hora.substring(0,5);
                                         return (
                                                 <div key={turno.id} className="bg-white w-auto h-7 mt-9 rounded-xl h-18 flex flex-row md:w-140 overflow-hidden">
                                                     <div className={`w-1 ${turno.pendiente?"bg-green-300":"bg-yellow-400"}`}></div>
                                                     <div className="flex flex-row justify-between w-full md:w-140">
                                                         <div className="flex flex-col">
-                                                            <h1 className="text-xl m-2">{turno.serviceId.name}</h1>
+                                                            <h1 className="text-xl m-2">{turno.service.name}</h1>
                                                             <div className="flex flex-row gap-x-5">
-                                                                <h2 className="ml-2">Cliente: {turno.clientId.name}</h2>
-                                                                <h2>Cel: {turno.clientId.phone}</h2>
+                                                                <h2 className="ml-2">Cliente: {turno.client.name}</h2>
+                                                                <h2>Cel: {turno.client.phone}</h2>
                                                             </div>
 
                                                         </div>
-                                                        <div className="flex flex-col justify-center mr-2">
-                                                            <h2 className="">{horario}</h2>
+                                                        <div className="flex flex-col justify-center mr-1">
+                                                            <h2>{horario}</h2>
+                                                            <h2>{fecha}</h2>
                                                         </div>
                                                     </div>
 
@@ -71,7 +72,7 @@ export function AppointmentsForm({turnoEdit,formValue,setFormValue}:{turnoEdit:T
     const {services} = useContext(ServiceContext)!;
 
     const onSubmit:SubmitHandler<TurnoFormValues> = (data) =>{
-
+        console.log(data);
     }
 
     return(

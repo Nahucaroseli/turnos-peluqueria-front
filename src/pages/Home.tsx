@@ -47,10 +47,10 @@ export function Home(){
                                 return (
                                     <div key={turno.id} className="bg-white w-auto h-7 mt-9 rounded-xl h-18 flex flex-row justify-between md:w-140">
                                         <div className="flex flex-col">
-                                            <h1 className="text-xl m-2">{turno.serviceId.name}</h1>
+                                            <h1 className="text-xl m-2">{turno.service.name}</h1>
                                             <div className="flex flex-row gap-x-5">
-                                                <h2 className="ml-2">Cliente: {turno.clientId.name}</h2>
-                                                <h2>Cel: {turno.clientId.phone}</h2>
+                                                <h2 className="ml-2">Cliente: {turno.client.name}</h2>
+                                                <h2>Cel: {turno.client.phone}</h2>
                                             </div>
 
                                         </div>
