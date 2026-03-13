@@ -41,9 +41,10 @@ export function Home(){
                         <div className="flex-1 md:w-250 mt-10 overflow-hidden">
                             <h1 className="text-2xl">Proximos Turnos</h1>
                             {turnos.map((turno)=>{
-                                const horario = new Date(turno.hora);
-                                const hora = horario.getHours();
-                                const minutos = horario.getMinutes();
+                                const horario = turno.hora.substring(0,5);
+                                const fecha = new Date(turno.fecha).toLocaleDateString("es-AR",{
+                                    dateStyle:"short"
+                                })
                                 return (
                                     <div key={turno.id} className="bg-white w-auto h-7 mt-9 rounded-xl h-18 flex flex-row justify-between md:w-140">
                                         <div className="flex flex-col">
@@ -55,7 +56,8 @@ export function Home(){
 
                                         </div>
                                         <div className="flex flex-col justify-center mr-2">
-                                            <h2 className="">{hora}:{minutos} HS</h2>
+                                             <h2>{horario}</h2>
+                                            <h2 className="">{fecha}</h2>
                                         </div>
 
                                     </div>

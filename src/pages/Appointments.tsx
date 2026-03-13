@@ -72,7 +72,10 @@ export function AppointmentsForm({turnoEdit,formValue,setFormValue}:{turnoEdit:T
 
     const {services} = useContext(ServiceContext)!;
 
-    const [date, setDate] = useState<Date|null>(new Date());
+    const {turnoDisponible,getTurnosDisponiblesContext} = useContext(TurnoContext)!;
+
+    const [date, setDate] = useState<Date>(new Date());
+
 
     const onSubmit:SubmitHandler<TurnoFormValues> = (data) =>{
         console.log(data);
@@ -89,9 +92,17 @@ export function AppointmentsForm({turnoEdit,formValue,setFormValue}:{turnoEdit:T
                 <input type="text" className="border-1 border-solid w-50" {...register("phone",{required:true})} placeholder="Telefono"/>
                 <label htmlFor="">Fecha y Hora</label>
                 <div className="flex flex-row gap-x-3">
-                    <DatePicker className="border-1 text-center" selected={date} onChange={(date:Date|null) => setDate(date)} dateFormat="yyyy-MM-dd"/>
-                    <select name="" id="">
-                        <option value="">Dias</option>
+                    <DatePicker className="border-1 text-center" selected={date} onChange={(date:Date|null) => {
+                        setDate(date!);
+                        getTurnosDisponiblesContext(date!);
+                    }} dateFormat="yyyy-MM-dd"/>
+                    <select>
+                        {turnoDisponible?.horarios.map((h)=>{
+                            return (
+                                    <option key={h} value={h}>{h}</option>
+                            )
+                        })}
+                       
                     </select>
                 </div>        
             

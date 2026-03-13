@@ -17,9 +17,9 @@ export const getClients = async():Promise<Turno[]> =>{
 };
 
 
-export const getTurnosDisponibles = async(fecha:Date):Promise<TurnoDisponible> =>{
+export const getTurnosDisponibles = async(fecha:Date):Promise<TurnoDisponible|null> =>{
     try {
-        const response = await fetch(`${API_URL}/turnos/disponibles?fecha=${fecha}`);
+        const response = await fetch(`${API_URL}/turnos/disponibles?fecha=${fecha.toISOString().substring(0,10)}`);
         const data = await response.json();
         return data;
     } catch (error) {
