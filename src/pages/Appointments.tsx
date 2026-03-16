@@ -5,9 +5,9 @@ import { TurnoContext } from "../context/turno.context";
 import type { Turno, TurnoFormValues } from "../types/turno.types";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { ServiceContext } from "../context/service.context";
-import DatePicker from "react-datepicker";
+import DatePicker,{registerLocale} from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
+import { es } from 'date-fns/locale/es';
 
 export function Appointments(){
 
@@ -68,6 +68,8 @@ export function Appointments(){
 
 export function AppointmentsForm({turnoEdit,formValue,setFormValue}:{turnoEdit:Turno|null, formValue:boolean,setFormValue:React.Dispatch<React.SetStateAction<boolean>>}){
 
+    registerLocale("es",es);
+
     const {register,handleSubmit} = useForm<TurnoFormValues>();
 
     const {services} = useContext(ServiceContext)!;
@@ -92,14 +94,14 @@ export function AppointmentsForm({turnoEdit,formValue,setFormValue}:{turnoEdit:T
                 <input type="text" className="border-1 border-solid w-50" {...register("phone",{required:true})} placeholder="Telefono"/>
                 <label htmlFor="">Fecha y Hora</label>
                 <div className="flex flex-row gap-x-3">
-                    <DatePicker className="border-1 text-center" selected={date} onChange={(date:Date|null) => {
+                    <DatePicker locale={es} className="border-1 text-center" selected={date} onChange={(date:Date|null) => {
                         setDate(date!);
                         getTurnosDisponiblesContext(date!);
                     }} dateFormat="yyyy-MM-dd"/>
                     <select>
                         {turnoDisponible?.horarios.map((h)=>{
                             return (
-                                    <option key={h} value={h}>{h}</option>
+                                    <option key={h} value={h}>{h.substring(0,5)}</option>
                             )
                         })}
                        
