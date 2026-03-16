@@ -80,7 +80,14 @@ export function AppointmentsForm({turnoEdit,formValue,setFormValue}:{turnoEdit:T
 
 
     const onSubmit:SubmitHandler<TurnoFormValues> = (data) =>{
-        console.log(data);
+        const turno:TurnoFormValues = {
+            name:data.name,
+            phone:data.phone,
+            fecha:date,
+            hora:data.hora,
+            serviceId:data.serviceId
+        }
+        addTurnoContext(turno);
     }
 
     return(
@@ -101,7 +108,7 @@ export function AppointmentsForm({turnoEdit,formValue,setFormValue}:{turnoEdit:T
                     <select>
                         {turnoDisponible?.horarios.map((h)=>{
                             return (
-                                    <option key={h} value={h}>{h.substring(0,5)}</option>
+                                    <option {...register("hora",{required:true})} key={h} value={h}>{h.substring(0,5)}</option>
                             )
                         })}
                        
@@ -109,10 +116,10 @@ export function AppointmentsForm({turnoEdit,formValue,setFormValue}:{turnoEdit:T
                 </div>        
             
                 <label htmlFor="">Servicio</label>
-                <select className="border-1 border-solid w-50" {...register("serviceId",{required:true})}>
+                <select className="border-1 border-solid w-50" >
                     {services.map((service)=> {
                         return(
-                            <option key={service.id} value={service.id}>{service.name}</option>
+                            <option {...register("serviceId",{required:true})} key={service.id} value={service.id}>{service.name}</option>
                         )
                     })}
   

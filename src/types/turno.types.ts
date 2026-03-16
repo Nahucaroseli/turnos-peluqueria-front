@@ -11,11 +11,11 @@ export type Turno ={
 }
 
 export type TurnoFormValues = {
+    "fecha":Date,
     "hora": string,
     "name": string,
     "phone":string,
-    "serviceId":Service,
-    "pendiente":boolean
+    "serviceId":Service
 }
 
 
