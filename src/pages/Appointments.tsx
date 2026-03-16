@@ -74,7 +74,7 @@ export function AppointmentsForm({turnoEdit,formValue,setFormValue}:{turnoEdit:T
 
     const {services} = useContext(ServiceContext)!;
 
-    const {turnoDisponible,getTurnosDisponiblesContext} = useContext(TurnoContext)!;
+    const {turnoDisponible,getTurnosDisponiblesContext,addTurnoContext} = useContext(TurnoContext)!;
 
     const [date, setDate] = useState<Date>(new Date());
 
@@ -85,7 +85,7 @@ export function AppointmentsForm({turnoEdit,formValue,setFormValue}:{turnoEdit:T
             phone:data.phone,
             fecha:date,
             hora:data.hora,
-            serviceId:data.serviceId
+            service:data.service
         }
         addTurnoContext(turno);
     }
@@ -119,7 +119,7 @@ export function AppointmentsForm({turnoEdit,formValue,setFormValue}:{turnoEdit:T
                 <select className="border-1 border-solid w-50" >
                     {services.map((service)=> {
                         return(
-                            <option {...register("serviceId",{required:true})} key={service.id} value={service.id}>{service.name}</option>
+                            <option {...register("service",{required:true})} key={service.id} value={service.id}>{service.name}</option>
                         )
                     })}
   

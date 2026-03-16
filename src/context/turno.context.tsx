@@ -39,7 +39,7 @@ export const TurnoProvider = ({children}: {children:ReactNode}) =>{
 
     return (
         
-        <TurnoContext.Provider value={{turnos,setTurnos,getTurnosDisponiblesContext,turnoDisponible}}>
+        <TurnoContext.Provider value={{turnos,setTurnos,getTurnosDisponiblesContext,turnoDisponible,addTurnoContext}}>
             {children}
         </TurnoContext.Provider>
     )

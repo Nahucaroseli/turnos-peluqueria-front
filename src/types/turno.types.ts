@@ -15,7 +15,7 @@ export type TurnoFormValues = {
     "hora": string,
     "name": string,
     "phone":string,
-    "serviceId":Service
+    "service":number
 }
 
 
