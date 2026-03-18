@@ -43,4 +43,19 @@ export const addTurno = async(turno:TurnoFormValues):Promise<Turno>=>{
         console.log(error);
         throw new Error("Error al agregar un turno");
     }
-}
+};
+
+
+
+export const deleteTurno = async(idTurno:Number):Promise<Response>=>{
+    try {
+        const response = await fetch(`${API_URL}/turnos/${idTurno}`,{
+            method:"DELETE"
+        });
+        return response;
+    } catch (error) {
+        console.log(error);
+        throw new Error("Error al eliminar el turno");
+    }
+
+};

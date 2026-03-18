@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState, type ReactNode } from "react";
-import { addTurno, getClients, getTurnosDisponibles } from "../api/service-turnos";
+import { addTurno, deleteTurno, getClients, getTurnosDisponibles } from "../api/service-turnos";
 import type {TurnoContextType } from "../types/turno.context.types";
 import { type TurnoDisponible, type Turno, type TurnoFormValues } from "../types/turno.types";
 
@@ -37,9 +37,22 @@ export const TurnoProvider = ({children}: {children:ReactNode}) =>{
         setTurnos([...turnos,t]);
     };
 
+
+    
+    const deleteTurnoContext = async(idTurno:Number)=>{
+        await deleteTurno(idTurno);
+        const newTurnos = turnos.filter((item)=>{
+            return item.id != idTurno;
+        })
+        setTurnos(newTurnos);
+    };
+
+
+
+
     return (
         
-        <TurnoContext.Provider value={{turnos,setTurnos,getTurnosDisponiblesContext,turnoDisponible,addTurnoContext}}>
+        <TurnoContext.Provider value={{turnos,setTurnos,getTurnosDisponiblesContext,turnoDisponible,addTurnoContext,deleteTurnoContext}}>
             {children}
         </TurnoContext.Provider>
     )

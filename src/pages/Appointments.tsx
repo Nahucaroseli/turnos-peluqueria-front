@@ -11,15 +11,20 @@ import { es } from 'date-fns/locale/es';
 
 export function Appointments(){
 
-  const {turnos} = useContext(TurnoContext)!;
+  const {turnos,deleteTurnoContext} = useContext(TurnoContext)!;
 
   const [openTurnoForm,setOpenTurnoForm] = useState(false);
+
+
+  const [isEllipsisOpen, setIsEllipsisOpen] = useState(Number);
+
+  const [turnoToEdit,setTurnoToEdit] = useState<Turno|null>(null);
 
 
 
         return (
             <>
-                <div className='h-screen flex flex-col'>
+                <div className='h-screen flex flex-col' onClick={()=>{setIsEllipsisOpen(888)}}>
                     <Navbar></Navbar>
                     <div className="flex flex-1 overflow-hidden">
                         <Aside></Aside>
@@ -33,8 +38,10 @@ export function Appointments(){
                                         })
                                         const horario = turno.hora.substring(0,5);
                                         return (
-                                                <div key={turno.id} className="bg-white w-auto h-7 mt-9 rounded-xl h-18 flex flex-row md:w-140 overflow-hidden">
-                                                    <div className={`w-1 ${turno.pendiente?"bg-green-300":"bg-yellow-400"}`}></div>
+                                                <div key={turno.id} className="bg-white w-auto h-7 mt-9 rounded-xl h-22 flex flex-row md:w-140">
+
+                                                        <div className={`w-1 ${turno.pendiente?"bg-green-300":"bg-yellow-400"}`}></div>
+                                              
                                                     <div className="flex flex-row justify-between w-full md:w-140">
                                                         <div className="flex flex-col">
                                                             <h1 className="text-xl m-2">{turno.service.name}</h1>
@@ -44,12 +51,16 @@ export function Appointments(){
                                                             </div>
 
                                                         </div>
-                                                        <div className="flex flex-col justify-center mr-1">
+                                                        <div className="flex flex-col justify-center -mr-4">
                                                             <h2>{horario}</h2>
                                                             <h2>{fecha}</h2>
                                                         </div>
                                                     </div>
-
+                                                    <div className="flex flex-col w-6">
+                                                        <i onClick={(e)=> {setIsEllipsisOpen(turno.id); e.stopPropagation();}} className="fa-solid fa-ellipsis relative cursor-pointer"></i>
+                                                        <button onClick={()=>{deleteTurnoContext(turno.id)}} className={`${isEllipsisOpen === turno.id?"bg-white border-1 relative w-20 -left-8  -top-16 rounded-t-xl cursor-pointer transition hover:bg-slate-200":"hidden"}`}>Eliminar</button>
+                                                        <button onClick={()=>{setTurnoToEdit(turno); setOpenTurnoForm(!openTurnoForm);}} className={`${isEllipsisOpen === turno.id?"bg-white border-1 relative w-20 -left-8 -top-16 rounded-b-xl cursor-pointer transition hover:bg-slate-200":"hidden"}`}>Editar</button>    
+                                                    </div>
                                                 </div>
                                             )
                                     })}
@@ -58,7 +69,7 @@ export function Appointments(){
                     </div>
         
                 </div>
-                <AppointmentsForm turnoEdit={null} formValue={openTurnoForm} setFormValue={setOpenTurnoForm}></AppointmentsForm>
+                <AppointmentsForm turnoEdit={turnoToEdit} formValue={openTurnoForm} setFormValue={setOpenTurnoForm}></AppointmentsForm>
                 </>
             )
 
