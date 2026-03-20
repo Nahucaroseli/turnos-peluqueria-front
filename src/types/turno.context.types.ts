@@ -1,4 +1,4 @@
-import type { Turno, TurnoDisponible, TurnoFormValues } from "./turno.types";
+import type { Turno, TurnoDisponible, TurnoEdit, TurnoFormValues } from "./turno.types";
 
 
 export type TurnoContextType = {
@@ -7,6 +7,7 @@ export type TurnoContextType = {
     setTurnos: React.Dispatch<React.SetStateAction<Turno[]>>,
     getTurnosDisponiblesContext:(fecha:Date)=>void,
     addTurnoContext:(turno:TurnoFormValues)=>void,
-    deleteTurnoContext:(idNumber:Number)=>void
+    deleteTurnoContext:(idNumber:Number)=>void,
+    editTurnoContext:(editTurno:TurnoEdit)=>void
 }
 

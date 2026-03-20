@@ -1,4 +1,4 @@
-import type { Turno, TurnoDisponible, TurnoFormValues } from "../types/turno.types";
+import type { Turno, TurnoDisponible, TurnoEdit, TurnoFormValues } from "../types/turno.types";
 
 //const LOCAL_API = import.meta.env.VITE_LOCAL_API;
 const API_URL = import.meta.env.VITE_API_URL;
@@ -57,5 +57,28 @@ export const deleteTurno = async(idTurno:Number):Promise<Response>=>{
         console.log(error);
         throw new Error("Error al eliminar el turno");
     }
+
+};
+
+export const editTurno = async(idTurno:number|undefined,editT:TurnoEdit):Promise<Turno>=>{
+    try {
+        
+        const response = await fetch(`${API_URL}/turnos/${idTurno}`,{
+            method:"PATCH",
+            headers:{
+                "Content-type":"application/JSON"
+            },
+            body: JSON.stringify(editT)
+        })
+
+        const data = await response.json();
+        return data;
+
+    } catch (error) {
+        console.log(error);
+        throw new Error("Error al editar el turno")
+    }
+
+
 
 };

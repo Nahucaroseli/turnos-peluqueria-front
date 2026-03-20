@@ -11,6 +11,7 @@ export type Turno ={
 }
 
 export type TurnoFormValues = {
+    "idTurno":number|undefined,
     "fecha":Date,
     "hora": string,
     "name": string,
@@ -23,3 +24,5 @@ export type TurnoDisponible = {
     "fecha":Date,
     "horarios":string[]
 }
+
+export type TurnoEdit = Omit<TurnoFormValues,"name"|"phone">
